@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Business{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 600px;">
+        <div class="mb-4">
+            <a href="{{ path('app_business') }}" class="text-muted text-decoration-none small fw-medium">
+                ← Cancel
+            </a>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 p-md-5">
+            <h2 class="h4 fw-bold text-dark mb-2">Edit Business</h2>
+            <p class="text-muted small mb-4">Updating business: <strong class="text-dark">#{{ form.vars.data.id }}</strong></p>
+
+            {{ form_start(form) }}
+
+            <div class="mb-4 text-dark">
+                {{ form_widget(form) }}
+            </div>
+
+            <div class="d-grid gap-2 pt-2">
+                <button type="submit" class="btn btn-primary rounded-pill fw-semibold py-2.5 shadow-sm">
+                    Update Business
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <style>
+        .card button[type="submit"]:not(.btn-primary) {
+            display: none !important;
+        }
+
+        .card input, .card select, .card textarea {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 1.25rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 50rem !important;
+            margin-bottom: 20px;
+        }
+        .card textarea {
+            border-radius: 1rem !important;
+        }
+        .card label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #6c757d;
+            font-size: .875em;
+        }
+    </style>
+{% endblock %}

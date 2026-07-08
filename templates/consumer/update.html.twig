@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Consumer{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 550px;">
+        <div class="mb-4">
+            <a href="{{ path('app_consumer') }}" class="text-muted text-decoration-none small fw-medium">
+                ← Cancel
+            </a>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 p-md-5">
+            <h2 class="h4 fw-bold text-dark mb-2">Edit Consumer Profile</h2>
+            <p class="text-muted small mb-4">Modifying profile: <strong class="text-dark">#{{ consumer.id }}</strong></p>
+
+            {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_label(form.first_name, 'First Name', {'label_attr': {'class': 'form-label fw-semibold text-secondary small'}}) }}
+                {{ form_widget(form.first_name, {'attr': {'class': 'form-control rounded-pill border-light bg-light px-4 py-2.5'}}) }}
+                <div class="text-danger small mt-1">{{ form_errors(form.first_name) }}</div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.last_name, 'Last Name', {'label_attr': {'class': 'form-label fw-semibold text-secondary small'}}) }}
+                {{ form_widget(form.last_name, {'attr': {'class': 'form-control rounded-pill border-light bg-light px-4 py-2.5'}}) }}
+                <div class="text-danger small mt-1">{{ form_errors(form.last_name) }}</div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.phone_number, 'Phone Number', {'label_attr': {'class': 'form-label fw-semibold text-secondary small'}}) }}
+                {{ form_widget(form.phone_number, {'attr': {'class': 'form-control rounded-pill border-light bg-light px-4 py-2.5'}}) }}
+                <div class="text-danger small mt-1">{{ form_errors(form.phone_number) }}</div>
+            </div>
+
+            <div class="mb-4">
+                {{ form_label(form.user, 'Link to User Account', {'label_attr': {'class': 'form-label fw-semibold text-secondary small'}}) }}
+                {{ form_widget(form.user, {'attr': {'class': 'form-select rounded-pill border-light bg-light px-4 py-2.5'}}) }}
+                <div class="text-danger small mt-1">{{ form_errors(form.user) }}</div>
+            </div>
+
+            <div class="d-grid gap-2 pt-2">
+                <button type="submit" class="btn btn-primary rounded-pill fw-semibold py-2.5 shadow-sm">
+                    Update Profile
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

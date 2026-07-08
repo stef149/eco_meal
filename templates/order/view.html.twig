@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order #{{ order.id }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 550px;">
+        <div class="mb-4">
+            <a href="{{ path('app_order') }}" class="text-muted text-decoration-none small fw-medium">
+                ← Back to orders
+            </a>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 p-md-5 position-relative">
+            <div class="text-center border-bottom pb-4 mb-4">
+                <span class="text-muted small fw-mono d-block mb-1">Receipt</span>
+                <h2 class="h4 fw-bold text-dark mb-1">Order #{{ order.id }}</h2>
+                <p class="text-secondary small m-0">Plaza on {{ order.createAt ? order.createAt|date('d F Y \\a\\t H:i') : 'N/A' }}</p>
+            </div>
+
+            <div class="mb-4">
+                <h4 class="h6 fw-bold text-secondary text-uppercase small mb-3">Customer Information</h4>
+                <div class="bg-light rounded-3 p-3 mb-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted small">Full Name:</span>
+                        <strong class="text-dark small">{{ order.consumer ? order.consumer.firstName ~ ' ' ~ order.consumer.lastName : 'N/A' }}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted small">Phone Number:</span>
+                        <span class="text-dark small fw-medium">{{ order.consumer ? order.consumer.phoneNumber : 'N/A' }}</span>
+                    </div>
+                </div>
+
+                <h4 class="h6 fw-bold text-secondary text-uppercase small mb-3">Item Details</h4>
+                <div class="bg-light rounded-3 p-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-dark fw-medium small">{{ order.package ? order.package.name : 'N/A' }}</span>
+                        <span class="fw-bold text-primary">
+                        {{ order.package ? order.package.price|number_format(2, ',', '.') : '0,00' }} RON
+                    </span>
+                    </div>
+                    <div class="border-top pt-2 mt-2">
+                        <div class="d-flex justify-content-between align-items-center small text-secondary">
+                            <span>Provider Business:</span>
+                            <span class="fw-medium text-dark">{{ order.package and order.package.business ? order.package.business.name : 'N/A' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center bg-primary text-white rounded-3 p-3 mb-4 shadow-sm">
+                <span class="fw-semibold">Total Amount</span>
+                <span class="fs-4 fw-bold">{{ order.package ? order.package.price|number_format(2, ',', '.') : '0,00' }} RON</span>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3 border-top pt-4">
+                <a href="{{ path('app_order_edit', {'id': order.id}) }}" class="btn btn-outline-secondary rounded-pill px-4 btn-sm fw-medium">
+                    Modify Order
+                </a>
+                <a href="{{ path('app_order_delete', {'id': order.id}) }}" class="btn btn-danger rounded-pill px-4 btn-sm fw-medium">
+                    Cancel Order
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consumer Profile{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 600px;">
+        <div class="mb-4">
+            <a href="{{ path('app_consumer') }}" class="text-muted text-decoration-none small fw-medium">
+                ← Back to list
+            </a>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 p-md-5">
+            <div class="text-center mb-4">
+                <span class="text-muted small fw-mono d-block mb-2">Profile ID: #{{ consumer.id }}</span>
+                <h2 class="h3 fw-bold text-dark mb-1">{{ consumer.firstName }} {{ consumer.lastName }}</h2>
+                <p class="text-muted m-0">Account: {{ consumer.user ? consumer.user.email : 'N/A' }}</p>
+            </div>
+
+            <div class="bg-light rounded-3 p-3 mb-4">
+                <div class="d-flex justify-content-between mb-2 border-bottom pb-2">
+                    <span class="text-secondary small">Phone Number</span>
+                    <span class="fw-medium text-dark">{{ consumer.phoneNumber }}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="text-secondary small">System Role</span>
+                    <span class="fw-medium text-dark">Consumer / Client</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3 border-top pt-4">
+                <a href="{{ path('app_consumer_edit', {'id': consumer.id}) }}" class="btn btn-outline-secondary rounded-pill px-4 btn-sm fw-medium">
+                    Edit Profile
+                </a>
+                <a href="{{ path('app_consumer_delete', {'id': consumer.id}) }}" class="btn btn-danger rounded-pill px-4 btn-sm fw-medium">
+                    Delete Profile
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

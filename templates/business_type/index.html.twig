@@ -1,30 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BusinessController!{% endblock %}
+{% block title %}Business Types{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
+    <div class="container mt-5" style="max-width: 900px;">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h2 class="h4 fw-bold text-dark m-0">Setup Categories</h2>
+            <a href="{{ path('app_business_type_new') }}" class="btn btn-primary rounded-pill px-4 shadow-sm fw-semibold">
+                + Add New Type
+            </a>
+        </div>
 
-    <div class="example-wrapper">
-        <a href="{{ path('app_business_type_new') }}">Create new business type</a>
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="row g-4">
             {% for type in business_types %}
-                <tr>
-                    <td>{{ type.id }}</td>
-                    <td>{{ type.name }}</td>
-                </tr>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 bg-white position-relative overflow-hidden group-hover">
+                        <div class="card-body p-4 d-flex flex-column justify-content-between">
+
+                            <div>
+                                <span class="text-muted small fw-mono d-block mb-1">#{{ type.id }}</span>
+                                <h3 class="h5 fw-bold text-dark mb-3">{{ type.name }}</h3>
+                            </div>
+
+                            <div class="d-flex justify-content-end border-top pt-3 mt-2">
+                                <a href="{{ path('app_business_type_delete', {'id': type.id}) }}"
+                                   class="text-danger text-decoration-none fw-medium small">
+                                    Remove
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted fs-5">No categories created yet.</p>
+                </div>
             {% endfor %}
-            </tbody>
-        </table>
+        </div>
     </div>
 {% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 1000px;">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h2 class="h4 fw-bold text-dark m-0">Orders Management</h2>
+            <a href="{{ path('app_order_new') }}" class="btn btn-primary rounded-pill px-4 shadow-sm fw-semibold">
+                + Create New Order
+            </a>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden bg-white">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light text-secondary small fw-bold text-uppercase">
+                    <tr>
+                        <th class="ps-4 py-3">Order ID</th>
+                        <th class="py-3">Customer</th>
+                        <th class="py-3">Package / Menu</th>
+                        <th class="py-3">Date Placed</th>
+                        <th class="pe-4 py-3 text-end">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-dark small">
+                    {% for order in orders %}
+                        <tr>
+                            <td class="ps-4 fw-mono text-secondary">#{{ order.id }}</td>
+                            <td class="fw-medium">
+                                {{ order.consumer ? order.consumer.firstName ~ ' ' ~ order.consumer.lastName : 'Unknown Customer' }}
+                            </td>
+                            <td>
+                                    <span class="badge bg-light text-primary rounded-pill px-2.5 py-1.5 fw-normal">
+                                        📦 {{ order.package ? order.package.name : 'N/A' }}
+                                    </span>
+                            </td>
+                            <td class="text-secondary">
+                                {{ order.createAt ? order.createAt|date('d M Y, H:i') : '' }}
+                            </td>
+                            <td class="pe-4 text-end">
+                                <a href="{{ path('app_order_view', {'id': order.id}) }}" class="text-primary text-decoration-none fw-medium me-3">View</a>
+                                <a href="{{ path('app_order_edit', {'id': order.id}) }}" class="text-secondary text-decoration-none fw-medium me-3">Edit</a>
+                                <a href="{{ path('app_order_delete', {'id': order.id}) }}" class="text-danger text-decoration-none fw-medium">Remove</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted fs-6">
+                                No orders found in the system.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
