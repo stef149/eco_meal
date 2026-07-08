@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Order{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 550px;">
+        <div class="mb-4">
+            <a href="{{ path('app_order') }}" class="text-muted text-decoration-none small fw-medium">
+                ← Cancel
+            </a>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 p-md-5">
+            <h2 class="h4 fw-bold text-dark mb-1">Edit Order Info</h2>
+            <p class="text-muted small mb-4">Modifying order record: <strong class="text-dark">#{{ order.id }}</strong></p>
+
+            {{ form_start(form) }}
+            <div class="mb-4">
+                {{ form_label(form.consumer, 'Customer Profile', {'label_attr': {'class': 'form-label fw-semibold text-secondary small'}}) }}
+                {{ form_widget(form.consumer, {'attr': {'class': 'form-select rounded-pill border-light bg-light px-4 py-2.5'}}) }}
+                <div class="text-danger small mt-1">{{ form_errors(form.consumer) }}</div>
+            </div>
+
+            <div class="mb-4">
+                {{ form_label(form.package, 'Package / Menu', {'label_attr': {'class': 'form-label fw-semibold text-secondary small'}}) }}
+                {{ form_widget(form.package, {'attr': {'class': 'form-select rounded-pill border-light bg-light px-4 py-2.5'}}) }}
+                <div class="text-danger small mt-1">{{ form_errors(form.package) }}</div>
+            </div>
+
+            <div class="d-grid gap-2 pt-2">
+                <button type="submit" class="btn btn-primary rounded-pill fw-semibold py-2.5 shadow-sm">
+                    Update Order
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

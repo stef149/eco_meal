@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class BusinessFormType extends AbstractType
 {
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name',TextType::class)
@@ -23,12 +23,12 @@ class BusinessFormType extends AbstractType
             ->add('houseNumber',TextType::class)
             ->add('phoneNumber',TextType::class)
             ->add('businessType',EntityType::class,[
-                'class'=>BusinessType::class,
+                'class'=> BusinessType::class,
                 'choice_label'=>'name'
             ])
             ->add('submit', SubmitType::class);
     }
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
        $resolver->setDefaults([
            'data_class' => Business::class,

@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Business Type{% endblock %}
+{% block title %}New Category{% endblock %}
 
 {% block body %}
     <div class="container mt-5" style="max-width: 500px;">
         <div class="mb-4">
-            <a href="{{ path('app_business_type') }}" class="text-muted text-decoration-none small fw-medium d-inline-flex align-items-center gap-1">
+            <a href="{{ path('app_category') }}" class="text-muted text-decoration-none small fw-medium">
                 ← Back to categories
             </a>
         </div>
 
         <div class="card border-0 shadow-sm rounded-3 bg-white p-4 p-md-5">
-            <h2 class="h4 fw-bold text-dark mb-4">Create Business Type</h2>
+            <h2 class="h4 fw-bold text-dark mb-4">Create Category</h2>
 
             {{ form_start(form) }}
             <div class="mb-4">
-                {{ form_label(form.name, 'Business Type Name', {'label_attr': {'class': 'form-label fw-semibold text-secondary small'}}) }}
-                {{ form_widget(form.name, {'attr': {'class': 'form-control rounded-pill border-light bg-light px-4 py-2.5', 'placeholder': 'e.g. Restaurant, Bakery, Cafe'}}) }}
+                {{ form_label(form.name, 'Category Name', {'label_attr': {'class': 'form-label fw-semibold text-secondary small'}}) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control rounded-pill border-light bg-light px-4 py-2.5', 'placeholder': 'e.g. Drinks, Desserts, Burgers'}}) }}
                 <div class="text-danger small mt-1">
                     {{ form_errors(form.name) }}
                 </div>
@@ -24,11 +24,9 @@
 
             <div class="d-grid gap-2 pt-2">
                 <button type="submit" class="btn btn-primary rounded-pill fw-semibold py-2.5 shadow-sm">
-                    Save Type
+                    Save Category
                 </button>
             </div>
-
-            {% do form.setRendered %}
             {{ form_end(form) }}
         </div>
     </div>

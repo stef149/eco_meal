@@ -49,6 +49,33 @@ final class BusinessController extends AbstractController
         ]);
 
     }
+
+    #[Route('/business/{id}/edit', name: 'app_business_edit', methods: ['GET','POST'])]
+    public function edit(Request $request, Business $business,EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(BusinessFormType::class, $business);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute('app_business');
+        }
+        return $this->render('business/update.html.twig',[
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/business/{id}/delete', name: 'app_business_delete', methods: ['GET'])]
+    public function delete(Business $business, EntityManagerInterface $entityManager): Response
+    {
+
+        $entityManager->remove($business);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_business');
+    }
+
+
+
 }
 
 

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Packages / Menus{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 1000px;">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h2 class="h4 fw-bold text-dark m-0">Available Packages</h2>
+            <a href="{{ path('app_package_new') }}" class="btn btn-primary rounded-pill px-4 shadow-sm fw-semibold">
+                + Create New Package
+            </a>
+        </div>
+
+        <div class="row g-4">
+            {% for package in packages %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 bg-white d-flex flex-column justify-content-between">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-mono">#{{ package.id }}</span>
+                                <span class="text-muted small">{{ package.createdAt ? package.createdAt|date('d M Y') : '' }}</span>
+                            </div>
+
+                            <h3 class="h5 fw-bold text-dark mb-2">{{ package.name }}</h3>
+                            <p class="text-secondary small mb-3 text-truncate-2">{{ package.description }}</p>
+
+                            <div class="fs-4 fw-bold text-primary mb-3">
+                                {{ package.price|number_format(2, ',', '.') }} RON
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                <span class="badge bg-light text-dark rounded-pill px-2.5 py-1.5 small fw-normal">
+                                    📁 {{ package.category ? package.category.name : 'No category' }}
+                                </span>
+                                <span class="badge bg-light text-primary rounded-pill px-2.5 py-1.5 small fw-normal">
+                                    🏢 {{ package.business ? package.business.name : 'No business' }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="card-footer bg-transparent border-top p-4 d-flex justify-content-between align-items-center">
+                            <div>
+                                <a href="{{ path('app_package_view', {'id': package.id}) }}" class="text-primary text-decoration-none small fw-medium me-3">View</a>
+                                <a href="{{ path('app_package_edit', {'id': package.id}) }}" class="text-secondary text-decoration-none small fw-medium">Edit</a>
+                            </div>
+                            <a href="{{ path('app_package_delete', {'id': package.id}) }}" class="text-danger text-decoration-none small fw-medium">
+                                Remove
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted fs-5">No packages created yet.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

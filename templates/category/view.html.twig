@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category Details{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 500px;">
+        <div class="mb-4">
+            <a href="{{ path('app_category') }}" class="text-muted text-decoration-none small fw-medium">
+                ← Back to categories
+            </a>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-3 bg-white p-4 p-md-5 text-center">
+            <span class="text-muted small fw-mono d-block mb-2">Category ID: #{{ category.id }}</span>
+            <h2 class="h3 fw-bold text-dark mb-4">{{ category.name }}</h2>
+
+            <div class="d-flex justify-content-center gap-3 border-top pt-4">
+                <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-outline-secondary rounded-pill px-4 btn-sm fw-medium">
+                    Edit Name
+                </a>
+                <a href="{{ path('app_category_delete', {'id': category.id}) }}" class="btn btn-danger rounded-pill px-4 btn-sm fw-medium">
+                    Delete Category
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

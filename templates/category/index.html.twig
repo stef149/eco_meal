@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block body %}
+    <div class="container mt-5" style="max-width: 900px;">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h2 class="h4 fw-bold text-dark m-0">Menu Categories</h2>
+            <a href="{{ path('app_category_new') }}" class="btn btn-primary rounded-pill px-4 shadow-sm fw-semibold">
+                + Add New Category
+            </a>
+        </div>
+
+        <div class="row g-4">
+            {% for category in categories %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 bg-white position-relative overflow-hidden">
+                        <div class="card-body p-4 d-flex flex-column justify-content-between">
+
+                            <div>
+                                <span class="text-muted small fw-mono d-block mb-1">#{{ category.id }}</span>
+                                <h3 class="h5 fw-bold text-dark mb-3">{{ category.name }}</h3>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center border-top pt-3 mt-2">
+                                <div>
+                                    <a href="{{ path('app_category_view', {'id': category.id}) }}" class="text-primary text-decoration-none small fw-medium me-3">View</a>
+                                    <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="text-secondary text-decoration-none small fw-medium">Edit</a>
+                                </div>
+                                <a href="{{ path('app_category_delete', {'id': category.id}) }}" class="text-danger text-decoration-none small fw-medium">
+                                    Remove
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted fs-5">No categories created yet.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
